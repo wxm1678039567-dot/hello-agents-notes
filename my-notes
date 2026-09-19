@@ -5,7 +5,7 @@
 
 ## LLM 为什么让 Agent 和以前不一样? LLM Agent 一方面利用神经网络获得模式识别、语言理解与生成能力，另一方面通过计划、工具调用等结构化步骤完成复杂任务，也就是所谓的 Hybrid Agent
 
-## 自主性： Agent 不需要认为提前规划好目标，能够自行根据目标、当前信息和环境反馈来决定下一步采取的措施
+## 自主性： Agent 不需要人为提前规划好目标，能够自行根据目标、当前信息和环境反馈来决定下一步采取的措施
 
 ## 鲁棒性（Robustness）：输入存在噪声、变化或异常时，系统仍能保持较稳定表现的能力
 
@@ -65,6 +65,34 @@ System Prompt
 
 
 其中 LLM 是“决策大脑”，Tool 提供外部能力，程序负责把这些组件连接成完整系统。
+
+
+1. 写 System Prompt
+2. 定义 Tools
+3. 把 Tools 放进 Tool Registry
+4. 搭建 / 配置 LLM Client
+5. 初始化用户任务和 Prompt History
+6. 进入 Agent Loop
+7. 每轮里：
+   LLM 生成 Thought + Action
+   → Parser 解析 Action
+   → 调用 Tool
+   → 得到 Observation
+   → 写回 History
+   → 继续下一轮
+
+【实际运行流程】
+User Request
+→ LLM
+→ Thought
+→ Action
+→ Parser
+→ Tool
+→ Observation
+→ Update Context
+→ LLM
+→ ...
+→ Finish
 
 6. **Workflow vs Agent**
 
